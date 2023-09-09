@@ -52,7 +52,10 @@ class ImageMultiTypeState extends State<ImageMultiType> {
       type = ImageType.assetSvg;
     } else if (widget.url.endsWith('svg')) {
       type = ImageType.networkSvg;
-    } else if (widget.url.contains('assets/') && widget.url.contains('.jpg')) {
+    } else if (widget.url.contains('http')) {
+      type = ImageType.network;
+    }
+    else if (widget.url.contains('assets/') && widget.url.contains('.jpg')) {
       type = ImageType.assetImg;
     } else {
       type = ImageType.network;
