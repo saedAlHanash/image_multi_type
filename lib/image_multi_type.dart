@@ -55,7 +55,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
     } else if (widget.url.contains('http')) {
       type = ImageType.network;
     }
-    else if (widget.url.contains('assets/') && widget.url.contains('.jpg')) {
+    else if (widget.url.contains('assets/') &&
+        (widget.url.contains('.jpg') || widget.url.contains('.png'))) {
       type = ImageType.assetImg;
     } else {
       type = ImageType.network;
