@@ -48,18 +48,14 @@ class ImageMultiTypeState extends State<ImageMultiType> {
     }
     if (widget.url.isEmpty) {
       type = ImageType.tempImg;
-    } else if (widget.url.contains('assets/') && widget.url.contains('.svg')) {
-      type = ImageType.assetSvg;
-    } else if (widget.url.endsWith('svg')) {
+    } else if (widget.url.startsWith('http') && widget.url.endsWith('svg')) {
       type = ImageType.networkSvg;
-    } else if (widget.url.contains('http')) {
+    } else if (widget.url.startsWith('http')) {
       type = ImageType.network;
-    }
-    else if (widget.url.contains('assets/') &&
-        (widget.url.contains('.jpg') || widget.url.contains('.png'))) {
-      type = ImageType.assetImg;
+    } else if (widget.url.contains('svg')) {
+      type = ImageType.assetSvg;
     } else {
-      type = ImageType.network;
+      type = ImageType.assetImg;
     }
   }
 
