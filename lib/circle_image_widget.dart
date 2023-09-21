@@ -12,22 +12,20 @@ class CircleImageWidget extends StatelessWidget {
     this.color,
     this.margin,
     this.padding,
-    this.file,
   }) : super(key: key);
 
   final double? size;
   final String? url;
-  final Future<Uint8List>? file;
   final Color? color;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
-    final imageRadios = size ?? 150.0;
+
     return Container(
-      height: imageRadios,
-      width: imageRadios,
+      height: size ?? 100.0,
+      width: size ?? 100.0,
       margin: margin,
       clipBehavior: Clip.hardEdge,
       padding: padding,
@@ -36,8 +34,7 @@ class CircleImageWidget extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: ImageMultiType(
-        url: url ?? '',
-        file: file,
+        url: url,
         fit: BoxFit.cover,
       ),
     );

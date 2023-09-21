@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-enum ImageType { tempImg, assetImg, assetSvg, network, file, networkSvg }
+enum ImageType { tempImg, assetImg, assetSvg, network, file, networkSvg, icon }
 
 Widget? _errorImage;
 
@@ -18,11 +18,9 @@ class ImageMultiType extends StatefulWidget {
     this.width,
     this.fit,
     this.color,
-    this.file,
   }) : super(key: key);
 
-  final String url;
-  final Future<Uint8List>? file;
+  final dynamic url;
   final double? height;
   final double? width;
   final BoxFit? fit;
@@ -39,23 +37,30 @@ class ImageMultiType extends StatefulWidget {
 }
 
 class ImageMultiTypeState extends State<ImageMultiType> {
-  var type = ImageType.network;
+  var type = ImageType.tempImg;
 
   void initialType() {
-    if (widget.file != null) {
+    if (widget.url != null is Future<Uint8List>) {
       type = ImageType.file;
       return;
     }
-    if (widget.url.isEmpty) {
-      type = ImageType.tempImg;
-    } else if (widget.url.startsWith('http') && widget.url.endsWith('svg')) {
-      type = ImageType.networkSvg;
-    } else if (widget.url.startsWith('http')) {
-      type = ImageType.network;
-    } else if (widget.url.contains('svg')) {
-      type = ImageType.assetSvg;
-    } else {
-      type = ImageType.assetImg;
+    if (widget.url is IconData) {
+      type = ImageType.icon;
+      return;
+    }
+
+    if (widget.url is String) {
+      if (widget.url.isEmpty) {
+        type = ImageType.tempImg;
+      } else if (widget.url.startsWith('http') && widget.url.endsWith('svg')) {
+        type = ImageType.networkSvg;
+      } else if (widget.url.startsWith('http')) {
+        type = ImageType.network;
+      } else if (widget.url.contains('svg')) {
+        type = ImageType.assetSvg;
+      } else {
+        type = ImageType.assetImg;
+      }
     }
   }
 
@@ -70,6 +75,13 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           width: widget.width,
           color: widget.color,
           fit: widget.fit,
+        );
+
+      case ImageType.icon:
+        return Icon(
+          widget.url,
+          size: widget.height ?? widget.width,
+          color: widget.color,
         );
       case ImageType.assetSvg:
         return SvgPicture.asset(
@@ -115,7 +127,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           },
         );
       case ImageType.file:
-        var byte = widget.file;
+        var byte = (widget.url as Future<Uint8List>);
         return FutureBuilder(
           future: byte,
           builder: (context, snapshot) {
