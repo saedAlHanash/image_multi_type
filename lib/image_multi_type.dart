@@ -40,7 +40,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
   var type = ImageType.tempImg;
 
   void initialType() {
-    if (widget.url != null is Future<Uint8List>) {
+    if (widget.url is Future<Uint8List>) {
       type = ImageType.file;
       return;
     }
