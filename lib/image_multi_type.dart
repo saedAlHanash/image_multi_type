@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-enum ImageType { tempImg, assetImg, assetSvg, network, file, networkSvg, icon }
+enum ImageType { tempImg, assetImg, assetSvg, network, fileAsync, file, networkSvg, icon }
 
 Widget? _errorImage;
 
@@ -41,6 +41,10 @@ class ImageMultiTypeState extends State<ImageMultiType> {
 
   void initialType() {
     if (widget.url is Future<Uint8List>) {
+      type = ImageType.fileAsync;
+      return;
+    }
+    if (widget.url is Uint8List) {
       type = ImageType.file;
       return;
     }
@@ -126,7 +130,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                 );
           },
         );
-      case ImageType.file:
+      case ImageType.fileAsync:
         var byte = (widget.url as Future<Uint8List>);
         return FutureBuilder(
           future: byte,
@@ -140,6 +144,12 @@ class ImageMultiTypeState extends State<ImageMultiType> {
               return const SizedBox();
             }
           },
+        );
+      case ImageType.file:
+        var byte = (widget.url as Uint8List);
+        return Image.memory(
+          byte,
+          fit: widget.fit,
         );
       case ImageType.networkSvg:
         return SvgPicture.network(
