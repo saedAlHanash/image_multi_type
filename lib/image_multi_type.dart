@@ -10,6 +10,8 @@ enum ImageType { tempImg, assetImg, assetSvg, network, fileAsync, file, networkS
 
 Widget? _errorImage;
 
+void setImageMultiTypeErrorImage(Widget url) => _errorImage = url;
+
 class ImageMultiType extends StatefulWidget {
   const ImageMultiType({
     Key? key,
@@ -25,12 +27,6 @@ class ImageMultiType extends StatefulWidget {
   final double? width;
   final BoxFit? fit;
   final Color? color;
-
-  static initial({
-    Widget? errorImage,
-  }) {
-    _errorImage = _errorImage;
-  }
 
   @override
   State<ImageMultiType> createState() => ImageMultiTypeState();
