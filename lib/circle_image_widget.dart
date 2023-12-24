@@ -15,7 +15,7 @@ class CircleImageWidget extends StatelessWidget {
   }) : super(key: key);
 
   final double? size;
-  final String? url;
+  final dynamic url;
   final Color? color;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
