@@ -6,7 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-enum ImageType { tempImg, assetImg, assetSvg, network, fileAsync, file, networkSvg, icon }
+enum ImageType {
+  tempImg,
+  assetImg,
+  assetSvg,
+  network,
+  fileAsync,
+  file,
+  networkSvg,
+  icon
+}
 
 Widget? _errorImage;
 
@@ -30,43 +39,45 @@ class ImageMultiType extends StatefulWidget {
 
   @override
   State<ImageMultiType> createState() => ImageMultiTypeState();
+
+  static ImageType initialType(dynamic url) {
+    var type = ImageType.tempImg;
+    if (url is Future<Uint8List>) {
+      type = ImageType.fileAsync;
+    }
+    if (url is Uint8List) {
+      type = ImageType.file;
+    }
+    if (url is IconData) {
+      type = ImageType.icon;
+    }
+
+    if (url is String) {
+      if (url.isEmpty) {
+        type = ImageType.tempImg;
+      } else if (url.startsWith('http') && url.endsWith('svg')) {
+        type = ImageType.networkSvg;
+      } else if (url.startsWith('http')) {
+        type = ImageType.network;
+      } else if (url.contains('svg')) {
+        type = ImageType.assetSvg;
+      } else if (url.contains('assets/')) {
+        type = ImageType.assetImg;
+      } else {
+        type = ImageType.tempImg;
+      }
+    }
+
+    return type;
+  }
 }
 
 class ImageMultiTypeState extends State<ImageMultiType> {
   var type = ImageType.tempImg;
 
-  void initialType() {
-    if (widget.url is Future<Uint8List>) {
-      type = ImageType.fileAsync;
-      return;
-    }
-    if (widget.url is Uint8List) {
-      type = ImageType.file;
-      return;
-    }
-    if (widget.url is IconData) {
-      type = ImageType.icon;
-      return;
-    }
-
-    if (widget.url is String) {
-      if (widget.url.isEmpty) {
-        type = ImageType.tempImg;
-      } else if (widget.url.startsWith('http') && widget.url.endsWith('svg')) {
-        type = ImageType.networkSvg;
-      } else if (widget.url.startsWith('http')) {
-        type = ImageType.network;
-      } else if (widget.url.contains('svg')) {
-        type = ImageType.assetSvg;
-      } else {
-        type = ImageType.assetImg;
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    initialType();
+    type = ImageMultiType.initialType(widget.url);
     switch (type) {
       case ImageType.assetImg:
         return Image.asset(
@@ -76,7 +87,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           color: widget.color,
           fit: widget.fit,
         );
-
       case ImageType.icon:
         return Icon(
           widget.url,
