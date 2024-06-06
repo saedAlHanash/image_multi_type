@@ -110,18 +110,13 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           filterQuality: FilterQuality.low,
           fit: widget.fit ?? BoxFit.cover,
           progressIndicatorBuilder: (context, url, progress) {
-            return Shimmer(
-              duration: const Duration(seconds: 2),
-              color: Colors.grey,
-              direction: const ShimmerDirection.fromLTRB(),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                clipBehavior: Clip.hardEdge,
-                child: Container(
-                  color: Colors.blueGrey,
-                  height: widget.height,
-                  width: widget.width,
-                ),
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              clipBehavior: Clip.hardEdge,
+              child: Container(
+                color: Colors.blueGrey,
+                height: widget.height,
+                width: widget.width,
               ),
             );
           },
