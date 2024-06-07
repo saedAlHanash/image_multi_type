@@ -109,17 +109,17 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           color: widget.color,
           filterQuality: FilterQuality.low,
           fit: widget.fit ?? BoxFit.cover,
-          progressIndicatorBuilder: (context, url, progress) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              clipBehavior: Clip.hardEdge,
-              child: Container(
-                color: Colors.blueGrey,
-                height: widget.height,
-                width: widget.width,
-              ),
-            );
-          },
+          // progressIndicatorBuilder: (context, url, progress) {
+          //   return ClipRRect(
+          //     borderRadius: BorderRadius.circular(12.0),
+          //     clipBehavior: Clip.hardEdge,
+          //     child: Container(
+          //       color: Colors.blueGrey,
+          //       height: widget.height,
+          //       width: widget.width,
+          //     ),
+          //   );
+          // },
           alignment: Alignment.center,
           errorWidget: (context, url, error) {
             return _errorImage ??
