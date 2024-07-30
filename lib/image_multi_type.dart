@@ -14,6 +14,7 @@ enum ImageType {
   fileAsync,
   file,
   networkSvg,
+  widget,
   icon
 }
 
@@ -42,14 +43,21 @@ class ImageMultiType extends StatefulWidget {
 
   static ImageType initialType(dynamic url) {
     var type = ImageType.tempImg;
+
     if (url is Future<Uint8List>) {
       type = ImageType.fileAsync;
     }
+
     if (url is Uint8List) {
       type = ImageType.file;
     }
+
     if (url is IconData) {
       type = ImageType.icon;
+    }
+
+    if (url is Widget) {
+      type = ImageType.widget;
     }
 
     if (url is String) {
@@ -73,17 +81,18 @@ class ImageMultiType extends StatefulWidget {
 }
 
 class ImageMultiTypeState extends State<ImageMultiType> {
-  var type = ImageType.tempImg;
+  ImageType get getImageType {
+    return ImageMultiType.initialType(widget.url);
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    type = ImageMultiType.initialType(widget.url);
-    switch (type) {
+  Widget get getWidget {
+    switch (getImageType) {
+      case ImageType.widget:
+        return widget.url;
+
       case ImageType.assetImg:
         return Image.asset(
           widget.url,
-          height: widget.height,
-          width: widget.width,
           color: widget.color,
           fit: widget.fit,
         );
@@ -96,16 +105,12 @@ class ImageMultiTypeState extends State<ImageMultiType> {
       case ImageType.assetSvg:
         return SvgPicture.asset(
           widget.url,
-          height: widget.height,
-          width: widget.width,
           color: widget.color,
           fit: widget.fit ?? BoxFit.contain,
         );
       case ImageType.network:
         return CachedNetworkImage(
           imageUrl: widget.url,
-          height: widget.height,
-          width: widget.width,
           color: widget.color,
           filterQuality: FilterQuality.low,
           fit: widget.fit ?? BoxFit.cover,
@@ -124,8 +129,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           errorWidget: (context, url, error) {
             return _errorImage ??
                 Container(
-                  height: widget.height,
-                  width: widget.width,
                   color: Colors.red.withOpacity(0.6),
                   child: const Icon(Icons.warning),
                 );
@@ -155,19 +158,24 @@ class ImageMultiTypeState extends State<ImageMultiType> {
       case ImageType.networkSvg:
         return SvgPicture.network(
           widget.url,
-          height: widget.height,
-          width: widget.width,
           color: widget.color,
           fit: widget.fit ?? BoxFit.contain,
         );
       case ImageType.tempImg:
         return _errorImage ??
             Container(
-              height: widget.height,
-              width: widget.width,
               color: Colors.red.withOpacity(0.6),
               child: const Icon(Icons.warning),
             );
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: widget.height,
+      width: widget.width,
+      child: getWidget,
+    );
   }
 }
