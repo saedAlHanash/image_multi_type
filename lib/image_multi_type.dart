@@ -31,7 +31,13 @@ Widget get getErrorWidget {
       child: const Icon(Icons.warning),
     );
   }
-  return ImageMultiType(url: _errorImage, defaultTempImage: true);
+  return Opacity(
+    opacity: (_errorImage is Widget) ? 1 : 0.3,
+    child: ImageMultiType(
+      url: _errorImage,
+      defaultTempImage: true,
+    ),
+  );
 }
 
 class ImageMultiType extends StatefulWidget {
