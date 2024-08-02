@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,9 +18,21 @@ enum ImageType {
   icon
 }
 
-Widget? _errorImage;
+dynamic _errorImage;
 
-void setImageMultiTypeErrorImage(Widget url) => _errorImage = url;
+void setImageMultiTypeErrorImage(dynamic url) => _errorImage = url;
+
+Widget get getErrorWidget {
+  if (_errorImage == null ||
+      _errorImage.toString().isEmpty ||
+      _errorImage.toString().startsWith('http')) {
+    return Container(
+      color: Colors.grey[300],
+      child: const Icon(Icons.warning),
+    );
+  }
+  return ImageMultiType(url: _errorImage);
+}
 
 class ImageMultiType extends StatefulWidget {
   const ImageMultiType({
@@ -126,11 +139,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           // },
           alignment: Alignment.center,
           errorWidget: (context, url, error) {
-            return _errorImage ??
-                Container(
-                  color: Colors.red.withOpacity(0.6),
-                  child: const Icon(Icons.warning),
-                );
+            log('ERROR IMAGE MULTI TYPE NETWORK IMAGE: ', name: url, error: error);
+            return getErrorWidget;
           },
         );
       case ImageType.fileAsync:
@@ -161,6 +171,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           fit: widget.fit ?? BoxFit.contain,
         );
       case ImageType.tempImg:
+        log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
         return _errorImage ??
             Container(
               color: Colors.red.withOpacity(0.6),
