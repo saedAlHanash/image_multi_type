@@ -172,7 +172,10 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         );
       case ImageType.tempImg:
         log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
-        return getErrorWidget;
+        return Container(
+          color: Colors.grey[300],
+          child: const Icon(Icons.warning),
+        );
     }
   }
 
