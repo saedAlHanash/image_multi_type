@@ -31,7 +31,7 @@ Widget get getErrorWidget {
       child: const Icon(Icons.warning),
     );
   }
-  return ImageMultiType(url: _errorImage);
+  return ImageMultiType(url: _errorImage, defaultTempImage: true);
 }
 
 class ImageMultiType extends StatefulWidget {
@@ -42,6 +42,7 @@ class ImageMultiType extends StatefulWidget {
     this.width,
     this.fit,
     this.color,
+    this.defaultTempImage = false,
   }) : super(key: key);
 
   final dynamic url;
@@ -49,6 +50,7 @@ class ImageMultiType extends StatefulWidget {
   final double? width;
   final BoxFit? fit;
   final Color? color;
+  final bool defaultTempImage;
 
   @override
   State<ImageMultiType> createState() => ImageMultiTypeState();
@@ -172,10 +174,12 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         );
       case ImageType.tempImg:
         log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
-        return Container(
-          color: Colors.grey[300],
-          child: const Icon(Icons.warning),
-        );
+        return widget.defaultTempImage
+            ? Container(
+                color: Colors.grey[300],
+                child: const Icon(Icons.warning),
+              )
+            : getErrorWidget;
     }
   }
 
