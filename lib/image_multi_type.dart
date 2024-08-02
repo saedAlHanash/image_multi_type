@@ -83,7 +83,7 @@ class ImageMultiType extends StatefulWidget {
         type = ImageType.network;
       } else if (url.contains('svg')) {
         type = ImageType.assetSvg;
-      } else if (url.contains('assets/')) {
+      } else if (url.contains('asset')) {
         type = ImageType.assetImg;
       } else {
         type = ImageType.tempImg;
@@ -175,9 +175,12 @@ class ImageMultiTypeState extends State<ImageMultiType> {
       case ImageType.tempImg:
         log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
         return widget.defaultTempImage
-            ? Container(
-                color: Colors.grey[300],
-                child: const Icon(Icons.warning),
+            ? Opacity(
+                opacity: 0.2,
+                child: Container(
+                  color: Colors.grey[300],
+                  child: const Icon(Icons.warning),
+                ),
               )
             : getErrorWidget;
     }
