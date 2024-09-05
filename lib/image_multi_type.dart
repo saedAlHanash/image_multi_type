@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,6 +22,12 @@ enum ImageType {
 dynamic _errorImage;
 
 void setImageMultiTypeErrorImage(dynamic url) => _errorImage = url;
+
+Future<Uint8List> fileSvg(String url) async {
+  var file = await DefaultCacheManager().getSingleFile(url);
+
+  return await file.readAsBytes();
+}
 
 Widget get getErrorWidget {
   if (_errorImage == null ||
@@ -173,11 +180,21 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           fit: widget.fit,
         );
       case ImageType.networkSvg:
-        return SvgPicture.network(
-          widget.url,
-          color: widget.color,
-          fit: widget.fit ?? BoxFit.contain,
-        );
+        return FutureBuilder(
+            future: fileSvg(widget.url),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return SizedBox(
+                  height: widget.height,
+                  width: widget.width,
+                );
+              }
+              return SvgPicture.memory(
+                snapshot.data!,
+                color: widget.color,
+                fit: widget.fit ?? BoxFit.contain,
+              );
+            });
       case ImageType.tempImg:
         log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
         return widget.defaultTempImage
