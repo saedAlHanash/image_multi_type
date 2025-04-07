@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_avif/flutter_avif.dart';
 
 enum ImageType {
   tempImg,
   assetImg,
+  assetAvif,
   assetSvg,
   network,
+  networkAvif,
   fileAsync,
   file,
   networkSvg,
@@ -23,7 +26,7 @@ dynamic _errorImage;
 
 void setImageMultiTypeErrorImage(dynamic url) => _errorImage = url;
 
-Future<Uint8List> fileSvg(String url) async {
+Future<Uint8List> urlToCachedFile(String url) async {
   var file = await DefaultCacheManager().getSingleFile(url);
 
   return await file.readAsBytes();
@@ -92,10 +95,14 @@ class ImageMultiType extends StatefulWidget {
         type = ImageType.tempImg;
       } else if (url.startsWith('http') && url.endsWith('svg')) {
         type = ImageType.networkSvg;
+      } else if (url.startsWith('http') && url.endsWith('avif')) {
+        type = ImageType.networkAvif;
       } else if (url.startsWith('http')) {
         type = ImageType.network;
       } else if (url.contains('svg')) {
         type = ImageType.assetSvg;
+      }  else if (url.contains('avif')) {
+        type = ImageType.assetAvif;
       } else if (url.contains('asset')) {
         type = ImageType.assetImg;
       } else {
@@ -114,6 +121,35 @@ class ImageMultiTypeState extends State<ImageMultiType> {
 
   Widget get getWidget {
     switch (getImageType) {
+
+      case ImageType.assetAvif:
+        return AvifImage.asset(
+          widget.url,
+          color: widget.color,
+          fit: widget.fit ?? BoxFit.contain,
+          height: widget.height,
+          width: widget.width,
+        );
+
+      case ImageType.networkAvif:
+        return FutureBuilder(
+            future: urlToCachedFile(widget.url),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return SizedBox(
+                  height: widget.height,
+                  width: widget.width,
+                );
+              }
+              return AvifImage.memory(
+                snapshot.data!,
+                color: widget.color,
+                fit: widget.fit ?? BoxFit.contain,
+                height: widget.height,
+                width: widget.width,
+              );
+            });
+
       case ImageType.widget:
         return widget.url;
 
@@ -141,17 +177,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           color: widget.color,
           filterQuality: FilterQuality.low,
           fit: widget.fit ?? BoxFit.cover,
-          // progressIndicatorBuilder: (context, url, progress) {
-          //   return ClipRRect(
-          //     borderRadius: BorderRadius.circular(12.0),
-          //     clipBehavior: Clip.hardEdge,
-          //     child: Container(
-          //       color: Colors.blueGrey,
-          //       height: widget.height,
-          //       width: widget.width,
-          //     ),
-          //   );
-          // },
           alignment: Alignment.center,
           errorWidget: (context, url, error) {
             log('ERROR IMAGE MULTI TYPE NETWORK IMAGE: ', name: url, error: error);
@@ -181,7 +206,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         );
       case ImageType.networkSvg:
         return FutureBuilder(
-            future: fileSvg(widget.url),
+            future: urlToCachedFile(widget.url),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return SizedBox(

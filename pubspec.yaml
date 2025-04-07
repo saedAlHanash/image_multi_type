@@ -10,14 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  flutter_svg: ^2.0.10+1
-  cached_network_image: ^3.3.1
+  flutter_avif: ^3.0.0
+  flutter_svg: ^2.0.17
+  cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
 
