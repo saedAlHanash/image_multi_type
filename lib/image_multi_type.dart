@@ -11,10 +11,8 @@ import 'package:flutter_avif/flutter_avif.dart';
 enum ImageType {
   tempImg,
   assetImg,
-  assetAvif,
   assetSvg,
   network,
-  networkAvif,
   fileAsync,
   file,
   networkSvg,
@@ -34,7 +32,9 @@ Future<Uint8List> urlToCachedFile(String url) async {
 
 Widget get getErrorWidget {
   if (_errorImage == null ||
-      _errorImage.toString().isEmpty ||
+      _errorImage
+          .toString()
+          .isEmpty ||
       _errorImage.toString().startsWith('http')) {
     return Container(
       color: Colors.grey[300],
@@ -95,14 +95,10 @@ class ImageMultiType extends StatefulWidget {
         type = ImageType.tempImg;
       } else if (url.startsWith('http') && url.endsWith('svg')) {
         type = ImageType.networkSvg;
-      } else if (url.startsWith('http') && url.endsWith('avif')) {
-        type = ImageType.networkAvif;
       } else if (url.startsWith('http')) {
         type = ImageType.network;
       } else if (url.contains('svg')) {
         type = ImageType.assetSvg;
-      }  else if (url.contains('avif')) {
-        type = ImageType.assetAvif;
       } else if (url.contains('asset')) {
         type = ImageType.assetImg;
       } else {
@@ -121,35 +117,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
 
   Widget get getWidget {
     switch (getImageType) {
-
-      case ImageType.assetAvif:
-        return AvifImage.asset(
-          widget.url,
-          color: widget.color,
-          fit: widget.fit ?? BoxFit.contain,
-          height: widget.height,
-          width: widget.width,
-        );
-
-      case ImageType.networkAvif:
-        return FutureBuilder(
-            future: urlToCachedFile(widget.url),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return SizedBox(
-                  height: widget.height,
-                  width: widget.width,
-                );
-              }
-              return AvifImage.memory(
-                snapshot.data!,
-                color: widget.color,
-                fit: widget.fit ?? BoxFit.contain,
-                height: widget.height,
-                width: widget.width,
-              );
-            });
-
       case ImageType.widget:
         return widget.url;
 
@@ -224,12 +191,12 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
         return widget.defaultTempImage
             ? Opacity(
-                opacity: 0.2,
-                child: Container(
-                  color: Colors.grey[300],
-                  child: const Icon(Icons.warning),
-                ),
-              )
+          opacity: 0.2,
+          child: Container(
+            color: Colors.grey[300],
+            child: const Icon(Icons.warning),
+          ),
+        )
             : getErrorWidget;
     }
   }
