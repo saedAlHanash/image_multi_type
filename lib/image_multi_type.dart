@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_avif/flutter_avif.dart';
+
 
 enum ImageType {
   tempImg,
@@ -146,7 +146,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           fit: widget.fit ?? BoxFit.cover,
           alignment: Alignment.center,
           errorWidget: (context, url, error) {
-            log('ERROR IMAGE MULTI TYPE NETWORK IMAGE: ', name: url, error: error);
+            // log('ERROR IMAGE MULTI TYPE NETWORK IMAGE: ', name: url, error: error);
             return getErrorWidget;
           },
         );
