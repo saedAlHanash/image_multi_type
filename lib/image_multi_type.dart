@@ -146,7 +146,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           fit: widget.fit ?? BoxFit.cover,
           alignment: Alignment.center,
           errorWidget: (context, url, error) {
-            // log('ERROR IMAGE MULTI TYPE NETWORK IMAGE: ', name: url, error: error);
+        
             return getErrorWidget;
           },
         );
@@ -188,7 +188,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
               );
             });
       case ImageType.tempImg:
-        log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
+
         return widget.defaultTempImage
             ? Opacity(
           opacity: 0.2,
