@@ -1,10 +1,8 @@
-import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum ImageType { tempImg, assetImg, assetSvg, network, fileAsync, file, networkSvg, widget, icon }
