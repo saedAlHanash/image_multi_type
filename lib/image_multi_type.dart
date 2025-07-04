@@ -106,24 +106,31 @@ class ImageMultiTypeState extends State<ImageMultiType> {
 
         case ImageType.assetImg:
           return Image.asset(
+            height: widget.height,
+            width: widget.width,
             widget.url,
             color: widget.color,
             fit: widget.fit,
           );
         case ImageType.icon:
           return Icon(
+
             widget.url,
             size: widget.height ?? widget.width,
             color: widget.color,
           );
         case ImageType.assetSvg:
           return SvgPicture.asset(
+            height: widget.height,
+            width: widget.width,
             widget.url,
             color: widget.color,
             fit: widget.fit ?? BoxFit.contain,
           );
         case ImageType.network:
           return CachedNetworkImage(
+            height: widget.height,
+            width: widget.width,
             imageUrl: widget.url,
             color: widget.color,
             filterQuality: FilterQuality.low,
@@ -143,6 +150,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Image.memory(
+                  height: widget.height,
+                  width: widget.width,
                   snapshot.requireData,
                   fit: widget.fit,
                 );
@@ -154,6 +163,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         case ImageType.file:
           var byte = (widget.url as Uint8List);
           return Image.memory(
+            height: widget.height,
+            width: widget.width,
             byte,
             fit: widget.fit,
           );
@@ -169,6 +180,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                 }
                 return SvgPicture.memory(
                   snapshot.data!,
+                  height: widget.height,
+                  width: widget.width,
                   color: widget.color,
                   fit: widget.fit ?? BoxFit.contain,
                 );
