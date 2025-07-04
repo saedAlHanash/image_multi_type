@@ -7,7 +7,6 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 enum ImageType {
   tempImg,
   assetImg,
@@ -32,9 +31,7 @@ Future<Uint8List> urlToCachedFile(String url) async {
 
 Widget get getErrorWidget {
   if (_errorImage == null ||
-      _errorImage
-          .toString()
-          .isEmpty ||
+      _errorImage.toString().isEmpty ||
       _errorImage.toString().startsWith('http')) {
     return Container(
       color: Colors.grey[300],
@@ -140,6 +137,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         );
       case ImageType.network:
         return CachedNetworkImage(
+          height: widget.height,
+          width: widget.width,
           imageUrl: widget.url,
           color: widget.color,
           filterQuality: FilterQuality.low,
@@ -191,12 +190,12 @@ class ImageMultiTypeState extends State<ImageMultiType> {
         log('ERROR IMAGE MULTI TYPE TEMP IMAGE: ');
         return widget.defaultTempImage
             ? Opacity(
-          opacity: 0.2,
-          child: Container(
-            color: Colors.grey[300],
-            child: const Icon(Icons.warning),
-          ),
-        )
+                opacity: 0.2,
+                child: Container(
+                  color: Colors.grey[300],
+                  child: const Icon(Icons.warning),
+                ),
+              )
             : getErrorWidget;
     }
   }
