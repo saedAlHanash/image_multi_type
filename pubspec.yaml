@@ -1,11 +1,14 @@
 name: image_multi_type
-description: A new Flutter project.
-version: 0.0.1
-#homepage:
+description: A comprehensive Flutter package for handling multiple image types including network, asset, SVG, file, and custom widgets with caching support and error handling.
+version: 1.0.0
+homepage: https://github.com/yourusername/image_multi_type
+repository: https://github.com/yourusername/image_multi_type
+issue_tracker: https://github.com/yourusername/image_multi_type/issues
+documentation: https://github.com/yourusername/image_multi_type#readme
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
-  flutter: ">=1.17.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
@@ -13,10 +16,12 @@ dependencies:
   flutter_svg: ^2.2.0
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
 
 flutter:
+  # No assets needed for this package
 

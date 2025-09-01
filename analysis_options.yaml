@@ -1,4 +1,77 @@
 include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+    # Error rules
+    avoid_empty_else: true
+    avoid_print: true
+    avoid_unused_constructor_parameters: true
+    cancel_subscriptions: true
+    close_sinks: true
+    comment_references: true
+    one_member_abstracts: true
+    only_throw_errors: true
+    package_api_docs: true
+    prefer_final_fields: true
+    prefer_single_quotes: true
+    slash_for_doc_comments: true
+    type_init_formals: true
+    unawaited_futures: true
+    unnecessary_const: true
+    unnecessary_new: true
+    unnecessary_null_in_if_null_operators: true
+    unnecessary_this: true
+    unrelated_type_equality_checks: true
+    use_rethrow_when_possible: true
+    valid_regexps: true
+
+    # Style rules
+    always_declare_return_types: true
+    avoid_annotating_with_dynamic: true
+    avoid_catches_without_on_clauses: true
+    avoid_catching_errors: true
+    avoid_double_and_int_checks: true
+    avoid_equals_and_hash_code_on_mutable_classes: true
+    avoid_escaping_inner_quotes: true
+    avoid_field_initializers_in_const_classes: true
+    avoid_function_literals_in_foreach_calls: true
+    avoid_implementing_value_types: true
+    avoid_init_to_null: true
+    avoid_null_checks_in_equality_operators: true
+    avoid_relative_lib_imports: true
+    avoid_return_types_on_setters: true
+    avoid_shadowing_type_parameters: true
+    avoid_types_as_parameter_names: true
+    camel_case_extensions: true
+    curly_braces_in_flow_control_structures: true
+    empty_catches: true
+    empty_constructor_bodies: true
+    library_names: true
+    library_prefixes: true
+    no_duplicate_case_values: true
+    null_closures: true
+    prefer_adjacent_string_concatenation: true
+    prefer_collection_literals: true
+    prefer_conditional_assignment: true
+    prefer_contains: true
+    prefer_equal_for_default_values: true
+    prefer_expression_function_bodies: true
+    prefer_final_in_for_each: true
+    prefer_for_elements_to_map_fromIterable: true
+    prefer_generic_function_type_aliases: true
+    prefer_if_null_operators: true
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    prefer_iterable_whereType: true
+    prefer_spread_collections: true
+    prefer_typing_uninitialized_variables: true
+    recursive_getters: true
+
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
