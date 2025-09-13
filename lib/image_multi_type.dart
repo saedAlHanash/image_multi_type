@@ -114,7 +114,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           );
         case ImageType.icon:
           return Icon(
-
             widget.url,
             size: widget.height ?? widget.width,
             color: widget.color,
@@ -139,6 +138,10 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             errorListener: (value) {
               // print('____________')
             },
+            maxHeightDiskCache: widget.height?.toInt(),
+            maxWidthDiskCache: widget.width?.toInt(),
+            memCacheHeight: widget.height?.toInt(),
+            memCacheWidth: widget.width?.toInt(),
             errorWidget: (context, url, error) {
               return getErrorWidget;
             },
