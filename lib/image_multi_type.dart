@@ -142,9 +142,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             maxWidthDiskCache: widget.width?.toInt(),
             memCacheHeight: widget.height?.toInt(),
             memCacheWidth: widget.width?.toInt(),
-            errorWidget: (context, url, error) {
-              return getErrorWidget;
-            },
+            errorWidget: (context, url, error) => getErrorWidget,
           );
         case ImageType.fileAsync:
           var byte = (widget.url as Future<Uint8List>);
