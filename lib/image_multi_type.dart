@@ -139,14 +139,16 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             imageUrl: widget.url,
             color: widget.color,
             filterQuality: FilterQuality.low,
-            imageBuilder: (context, imageProvider) => Image(
-              image: ResizeImage(
-                imageProvider,
-                width: widget.memCacheHeight, // العرض المطلوب
-                height: widget.memCacheWidth, // الارتفاع المطلوب
-              ),
-              fit: BoxFit.cover,
-            ),
+            imageBuilder: widget.memCacheHeight == null
+                ? null
+                : (context, imageProvider) => Image(
+                      image: ResizeImage(
+                        imageProvider,
+                        width: widget.memCacheHeight, // العرض المطلوب
+                        height: widget.memCacheWidth, // الارتفاع المطلوب
+                      ),
+                      fit: BoxFit.cover,
+                    ),
             fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
             memCacheHeight: widget.memCacheHeight,
