@@ -147,7 +147,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                         width: widget.memCacheHeight, // العرض المطلوب
                         height: widget.memCacheWidth, // الارتفاع المطلوب
                       ),
-                      fit: BoxFit.cover,
+                      fit: widget.fit ?? BoxFit.cover,
                     ),
             fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
