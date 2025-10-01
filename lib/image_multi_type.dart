@@ -44,6 +44,7 @@ class ImageMultiType extends StatefulWidget {
     this.memCacheHeight,
     this.memCacheWidth,
     this.defaultTempImage = false,
+    this.maxDiskSize,
   });
 
   final dynamic url;
@@ -54,6 +55,7 @@ class ImageMultiType extends StatefulWidget {
   final bool defaultTempImage;
   final int? memCacheHeight;
   final int? memCacheWidth;
+  final int? maxDiskSize;
 
   @override
   State<ImageMultiType> createState() => ImageMultiTypeState();
@@ -137,13 +139,20 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             imageUrl: widget.url,
             color: widget.color,
             filterQuality: FilterQuality.low,
+            imageBuilder: (context, imageProvider) => Image(
+              image: ResizeImage(
+                imageProvider,
+                width: widget.memCacheHeight, // العرض المطلوب
+                height: widget.memCacheWidth, // الارتفاع المطلوب
+              ),
+              fit: BoxFit.cover,
+            ),
             fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
-            errorListener: (value) {
-              // print('____________')
-            },
-            memCacheHeight: widget.memCacheHeight ,
-            memCacheWidth: widget.memCacheWidth ,
+            memCacheHeight: widget.memCacheHeight,
+            memCacheWidth: widget.memCacheWidth,
+            maxHeightDiskCache: widget.maxDiskSize,
+            maxWidthDiskCache: widget.maxDiskSize,
             errorWidget: (context, url, error) => getErrorWidget,
           );
         case ImageType.fileAsync:
