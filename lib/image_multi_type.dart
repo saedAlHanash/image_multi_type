@@ -41,6 +41,8 @@ class ImageMultiType extends StatefulWidget {
     this.width,
     this.fit,
     this.color,
+    this.memCacheHeight,
+    this.memCacheWidth,
     this.defaultTempImage = false,
   });
 
@@ -50,6 +52,8 @@ class ImageMultiType extends StatefulWidget {
   final BoxFit? fit;
   final Color? color;
   final bool defaultTempImage;
+  final int? memCacheHeight;
+  final int? memCacheWidth;
 
   @override
   State<ImageMultiType> createState() => ImageMultiTypeState();
@@ -114,7 +118,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
           );
         case ImageType.icon:
           return Icon(
-
             widget.url,
             size: widget.height ?? widget.width,
             color: widget.color,
@@ -139,9 +142,9 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             errorListener: (value) {
               // print('____________')
             },
-            errorWidget: (context, url, error) {
-              return getErrorWidget;
-            },
+            memCacheHeight: widget.memCacheHeight ,
+            memCacheWidth: widget.memCacheWidth ,
+            errorWidget: (context, url, error) => getErrorWidget,
           );
         case ImageType.fileAsync:
           var byte = (widget.url as Future<Uint8List>);
