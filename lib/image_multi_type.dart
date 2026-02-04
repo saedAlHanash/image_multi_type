@@ -149,6 +149,17 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                       ),
                       fit: widget.fit ?? BoxFit.cover,
                     ),
+            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+              child: SizedBox(
+                width: 30,
+                height: 30,
+                child: CircularProgressIndicator(
+                  value: downloadProgress.progress,
+                  strokeWidth: 2.5, // سماكة أقل تعطي مظهراً أرقى
+                  backgroundColor: Colors.grey.withOpacity(0.1),
+                ),
+              ),
+            ),
             fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
             memCacheHeight: widget.memCacheHeight,
@@ -211,7 +222,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                 )
               : getErrorWidget;
       }
-    } catch (e) {
+    } catch (_) {
       return getErrorWidget;
     }
   }
