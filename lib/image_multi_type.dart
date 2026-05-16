@@ -45,6 +45,7 @@ class ImageMultiType extends StatefulWidget {
     this.memCacheHeight,
     this.memCacheWidth,
     this.defaultTempImage = false,
+    this.maxDiskSize,
   });
 
   final dynamic url;
@@ -56,6 +57,7 @@ class ImageMultiType extends StatefulWidget {
   final bool defaultTempImage;
   final int? memCacheHeight;
   final int? memCacheWidth;
+  final int? maxDiskSize;
 
   @override
   State<ImageMultiType> createState() => ImageMultiTypeState();
@@ -143,13 +145,33 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             color: widget.color,
             colorBlendMode: widget.colorBlendMode,
             filterQuality: FilterQuality.low,
+            imageBuilder: widget.memCacheHeight == null
+                ? null
+                : (context, imageProvider) => Image(
+                      image: ResizeImage(
+                        imageProvider,
+                        width: widget.memCacheHeight, // العرض المطلوب
+                        height: widget.memCacheWidth, // الارتفاع المطلوب
+                      ),
+                      fit: widget.fit ?? BoxFit.cover,
+                    ),
+            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+              child: SizedBox(
+                width: 30,
+                height: 30,
+                child: CircularProgressIndicator(
+                  value: downloadProgress.progress,
+                  strokeWidth: 2.5, // سماكة أقل تعطي مظهراً أرقى
+                  backgroundColor: Colors.grey.withOpacity(0.1),
+                ),
+              ),
+            ),
             fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
-            errorListener: (value) {
-              // print('____________')
-            },
-            memCacheHeight: widget.memCacheHeight ,
-            memCacheWidth: widget.memCacheWidth ,
+            memCacheHeight: widget.memCacheHeight,
+            memCacheWidth: widget.memCacheWidth,
+            maxHeightDiskCache: widget.maxDiskSize,
+            maxWidthDiskCache: widget.maxDiskSize,
             errorWidget: (context, url, error) => getErrorWidget,
           );
         case ImageType.fileAsync:
@@ -211,7 +233,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                 )
               : getErrorWidget;
       }
-    } catch (e) {
+    } catch (_) {
       return getErrorWidget;
     }
   }

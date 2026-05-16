@@ -4,14 +4,18 @@ import 'image_multi_type.dart';
 
 class RoundImageWidget extends StatelessWidget {
   const RoundImageWidget({
-    Key? key,
+    super.key,
     required this.url,
     this.height,
     this.width,
     this.fit,
     this.color,
     this.radios,
-  }) : super(key: key);
+    this.defaultTempImage = false,
+    this.memCacheHeight,
+    this.memCacheWidth,
+    this.maxDiskSize,
+  });
 
   final dynamic url;
   final double? height;
@@ -19,6 +23,10 @@ class RoundImageWidget extends StatelessWidget {
   final double? radios;
   final BoxFit? fit;
   final Color? color;
+  final bool defaultTempImage;
+  final int? memCacheHeight;
+  final int? memCacheWidth;
+  final int? maxDiskSize;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +42,10 @@ class RoundImageWidget extends StatelessWidget {
               width: width,
               fit: fit,
               color: color,
+              defaultTempImage: defaultTempImage,
+              memCacheHeight: memCacheHeight,
+              memCacheWidth: memCacheWidth,
+              maxDiskSize: maxDiskSize,
             ),
           ),
         ],

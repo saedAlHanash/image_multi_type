@@ -12,6 +12,14 @@ class CircleImageWidget extends StatelessWidget {
     this.color,
     this.margin,
     this.padding,
+    this.height,
+    this.width,
+    this.radios,
+    this.fit,
+    this.defaultTempImage = false,
+    this.memCacheHeight,
+    this.memCacheWidth,
+    this.maxDiskSize,
   }) : super(key: key);
 
   final double? size;
@@ -20,9 +28,17 @@ class CircleImageWidget extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
 
+  final double? height;
+  final double? width;
+  final double? radios;
+  final BoxFit? fit;
+  final bool defaultTempImage;
+  final int? memCacheHeight;
+  final int? memCacheWidth;
+  final int? maxDiskSize;
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: size ?? 100.0,
       width: size ?? 100.0,
@@ -35,7 +51,13 @@ class CircleImageWidget extends StatelessWidget {
       ),
       child: ImageMultiType(
         url: url,
-        fit: BoxFit.cover,
+        height: height,
+        width: width,
+        fit: fit,
+        defaultTempImage: defaultTempImage,
+        memCacheHeight: memCacheHeight,
+        memCacheWidth: memCacheWidth,
+        maxDiskSize: maxDiskSize,
       ),
     );
   }
