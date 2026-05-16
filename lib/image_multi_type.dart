@@ -41,6 +41,7 @@ class ImageMultiType extends StatefulWidget {
     this.width,
     this.fit,
     this.color,
+    this.colorBlendMode,
     this.memCacheHeight,
     this.memCacheWidth,
     this.defaultTempImage = false,
@@ -51,6 +52,7 @@ class ImageMultiType extends StatefulWidget {
   final double? width;
   final BoxFit? fit;
   final Color? color;
+  final BlendMode? colorBlendMode;
   final bool defaultTempImage;
   final int? memCacheHeight;
   final int? memCacheWidth;
@@ -114,6 +116,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             width: widget.width,
             widget.url,
             color: widget.color,
+            colorBlendMode: widget.colorBlendMode,
             fit: widget.fit,
           );
         case ImageType.icon:
@@ -121,6 +124,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             widget.url,
             size: widget.height ?? widget.width,
             color: widget.color,
+
           );
         case ImageType.assetSvg:
           return SvgPicture.asset(
@@ -128,6 +132,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             width: widget.width,
             widget.url,
             color: widget.color,
+            colorFilter: widget.color != null ? ColorFilter.mode(widget.color!, widget.colorBlendMode ?? BlendMode.srcIn) : null,
             fit: widget.fit ?? BoxFit.contain,
           );
         case ImageType.network:
@@ -136,6 +141,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             width: widget.width,
             imageUrl: widget.url,
             color: widget.color,
+            colorBlendMode: widget.colorBlendMode,
             filterQuality: FilterQuality.low,
             fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
@@ -156,6 +162,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                   height: widget.height,
                   width: widget.width,
                   snapshot.requireData,
+                  color: widget.color,
+                  colorBlendMode: widget.colorBlendMode,
                   fit: widget.fit,
                 );
               } else {
@@ -169,6 +177,8 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             height: widget.height,
             width: widget.width,
             byte,
+            color: widget.color,
+            colorBlendMode: widget.colorBlendMode,
             fit: widget.fit,
           );
         case ImageType.networkSvg:
@@ -186,6 +196,7 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                   height: widget.height,
                   width: widget.width,
                   color: widget.color,
+                  colorFilter: widget.color != null ? ColorFilter.mode(widget.color!, widget.colorBlendMode ?? BlendMode.srcIn) : null,
                   fit: widget.fit ?? BoxFit.contain,
                 );
               });
