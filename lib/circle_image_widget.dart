@@ -10,6 +10,7 @@ class CircleImageWidget extends StatelessWidget {
     this.size,
     required this.url,
     this.color,
+    this.colorBlendMode,
     this.margin,
     this.padding,
     this.height,
@@ -25,6 +26,7 @@ class CircleImageWidget extends StatelessWidget {
   final double? size;
   final dynamic url;
   final Color? color;
+  final BlendMode? colorBlendMode;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
 
@@ -54,6 +56,7 @@ class CircleImageWidget extends StatelessWidget {
         height: height,
         width: width,
         fit: fit,
+        colorBlendMode: colorBlendMode,
         defaultTempImage: defaultTempImage,
         memCacheHeight: memCacheHeight,
         memCacheWidth: memCacheWidth,

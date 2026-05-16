@@ -10,6 +10,7 @@ class RoundImageWidget extends StatelessWidget {
     this.width,
     this.fit,
     this.color,
+    this.colorBlendMode,
     this.radios,
     this.defaultTempImage = false,
     this.memCacheHeight,
@@ -23,6 +24,7 @@ class RoundImageWidget extends StatelessWidget {
   final double? radios;
   final BoxFit? fit;
   final Color? color;
+  final BlendMode? colorBlendMode;
   final bool defaultTempImage;
   final int? memCacheHeight;
   final int? memCacheWidth;
@@ -42,6 +44,7 @@ class RoundImageWidget extends StatelessWidget {
               width: width,
               fit: fit,
               color: color,
+              colorBlendMode: colorBlendMode,
               defaultTempImage: defaultTempImage,
               memCacheHeight: memCacheHeight,
               memCacheWidth: memCacheWidth,

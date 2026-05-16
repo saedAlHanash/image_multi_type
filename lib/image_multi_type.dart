@@ -133,7 +133,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
             height: widget.height,
             width: widget.width,
             widget.url,
-            color: widget.color,
             colorFilter: widget.color != null ? ColorFilter.mode(widget.color!, widget.colorBlendMode ?? BlendMode.srcIn) : null,
             fit: widget.fit ?? BoxFit.contain,
           );
@@ -217,7 +216,6 @@ class ImageMultiTypeState extends State<ImageMultiType> {
                   snapshot.data!,
                   height: widget.height,
                   width: widget.width,
-                  color: widget.color,
                   colorFilter: widget.color != null ? ColorFilter.mode(widget.color!, widget.colorBlendMode ?? BlendMode.srcIn) : null,
                   fit: widget.fit ?? BoxFit.contain,
                 );

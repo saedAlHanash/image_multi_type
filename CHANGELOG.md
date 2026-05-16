@@ -5,6 +5,14 @@ All notable changes to the `image_multi_type` package will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2025-01-20
+
+### Added
+- `colorBlendMode` support for `ImageMultiType`, `CircleImageWidget`, and `RoundImageWidget`
+
+### Updated
+- Upgraded `flutter_svg` to `^2.3.0` for improved SVG rendering and features
+
 ## [1.0.0] - 2025-01-09
 
 ### Added

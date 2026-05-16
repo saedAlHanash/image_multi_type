@@ -183,6 +183,38 @@ class BasicExamplesPage extends StatelessWidget {
 )''',
           ),
 
+          // Color Blend Mode Example
+          _buildExampleCard(
+            title: 'Color Blend Mode',
+            description: 'Applying color blend mode to an image',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ImageMultiType(
+                  url: 'https://picsum.photos/150/150?random=21',
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                  color: Colors.blue.withOpacity(0.5),
+                  colorBlendMode: BlendMode.colorBurn,
+                ),
+                ImageMultiType(
+                  url: 'https://picsum.photos/150/150?random=21',
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                  color: Colors.red.withOpacity(0.5),
+                  colorBlendMode: BlendMode.multiply,
+                ),
+              ],
+            ),
+            code: '''ImageMultiType(
+  url: '...',
+  color: Colors.blue.withOpacity(0.5),
+  colorBlendMode: BlendMode.colorBurn,
+)''',
+          ),
+
           // Custom Widget
           _buildExampleCard(
             title: 'Custom Widget',

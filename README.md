@@ -53,6 +53,7 @@ ImageMultiType(
   height: 50,
   width: 50,
   color: Colors.blue,
+  colorBlendMode: BlendMode.srcIn,
 )
 ```
 
@@ -130,6 +131,7 @@ ImageMultiType(
 | `width` | `double?` | No | Widget width |
 | `fit` | `BoxFit?` | No | How to fit the image |
 | `color` | `Color?` | No | Tint color for the image |
+| `colorBlendMode` | `BlendMode?` | No | How to blend the color |
 | `defaultTempImage` | `bool` | No | Show default placeholder (default: false) |
 
 #### CircleImageWidget
@@ -139,6 +141,7 @@ ImageMultiType(
 | `url` | `dynamic` | Yes | Image source |
 | `size` | `double?` | No | Size of the circle (default: 100) |
 | `color` | `Color?` | No | Background color (default: white) |
+| `colorBlendMode` | `BlendMode?` | No | How to blend the color |
 | `margin` | `EdgeInsets?` | No | Outer margin |
 | `padding` | `EdgeInsets?` | No | Inner padding |
 
@@ -152,6 +155,7 @@ ImageMultiType(
 | `radios` | `double?` | No | Border radius (default: 12) |
 | `fit` | `BoxFit?` | No | How to fit the image |
 | `color` | `Color?` | No | Tint color |
+| `colorBlendMode` | `BlendMode?` | No | How to blend the color |
 
 ### 📱 Example App
 
@@ -216,6 +220,7 @@ ImageMultiType(
   height: 50,
   width: 50,
   color: Colors.blue,
+  colorBlendMode: BlendMode.srcIn,
 )
 ```
 
@@ -293,6 +298,7 @@ ImageMultiType(
 | `width` | `double?` | لا | عرض العنصر |
 | `fit` | `BoxFit?` | لا | كيفية ملائمة الصورة |
 | `color` | `Color?` | لا | لون التلوين للصورة |
+| `colorBlendMode` | `BlendMode?` | لا | كيفية دمج اللون |
 | `defaultTempImage` | `bool` | لا | إظهار صورة احتياطية افتراضية (افتراضي: خطأ) |
 
 #### CircleImageWidget
@@ -302,6 +308,7 @@ ImageMultiType(
 | `url` | `dynamic` | نعم | مصدر الصورة |
 | `size` | `double?` | لا | حجم الدائرة (افتراضي: 100) |
 | `color` | `Color?` | لا | لون الخلفية (افتراضي: أبيض) |
+| `colorBlendMode` | `BlendMode?` | لا | كيفية دمج اللون |
 | `margin` | `EdgeInsets?` | لا | الهامش الخارجي |
 | `padding` | `EdgeInsets?` | لا | الحشو الداخلي |
 
@@ -315,6 +322,7 @@ ImageMultiType(
 | `radios` | `double?` | لا | نصف قطر الحدود (افتراضي: 12) |
 | `fit` | `BoxFit?` | لا | كيفية ملائمة الصورة |
 | `color` | `Color?` | لا | لون التلوين |
+| `colorBlendMode` | `BlendMode?` | لا | كيفية دمج اللون |
 
 ### 📱 تطبيق المثال
 
