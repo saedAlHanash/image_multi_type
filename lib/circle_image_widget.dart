@@ -1,12 +1,10 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 
-import 'image_multi_type.dart';
+import 'package:image_multi_type/src/image_multi_type_widget.dart';
 
 class CircleImageWidget extends StatelessWidget {
   const CircleImageWidget({
-    Key? key,
+    super.key,
     this.size,
     required this.url,
     this.color,
@@ -21,7 +19,7 @@ class CircleImageWidget extends StatelessWidget {
     this.memCacheHeight,
     this.memCacheWidth,
     this.maxDiskSize,
-  }) : super(key: key);
+  });
 
   final double? size;
   final dynamic url;

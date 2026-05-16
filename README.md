@@ -22,7 +22,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  image_multi_type: ^1.0.0
+  image_multi_type: ^1.0.5
 ```
 
 ### 📖 Usage
@@ -189,7 +189,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ```yaml
 dependencies:
-  image_multi_type: ^1.0.0
+  image_multi_type: ^1.0.5
 ```
 
 ### 📖 الاستخدام

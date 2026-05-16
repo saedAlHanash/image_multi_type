@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:image_multi_type/image_multi_type_pakage.dart';
+import 'package:image_multi_type/image_multi_type.dart';
 
 void main() {
   runApp(const MyApp());

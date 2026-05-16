@@ -24,7 +24,7 @@ class NetworkCacheHelper {
     try {
       final file = await DefaultCacheManager().getFileFromCache(url);
       return file != null;
-    } catch (e) {
+    } on Exception {
       return false;
     }
   }

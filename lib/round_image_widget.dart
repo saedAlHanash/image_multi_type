@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'image_multi_type.dart';
+import 'package:image_multi_type/src/image_multi_type_widget.dart';
 
 class RoundImageWidget extends StatelessWidget {
   const RoundImageWidget({
@@ -31,28 +31,20 @@ class RoundImageWidget extends StatelessWidget {
   final int? maxDiskSize;
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Stack(
-        children: [
-          ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.circular(radios ?? 12.0),
-            child: ImageMultiType(
-              url: url,
-              height: height,
-              width: width,
-              fit: fit,
-              color: color,
-              colorBlendMode: colorBlendMode,
-              defaultTempImage: defaultTempImage,
-              memCacheHeight: memCacheHeight,
-              memCacheWidth: memCacheWidth,
-              maxDiskSize: maxDiskSize,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ClipRRect(
+        clipBehavior: Clip.hardEdge,
+        borderRadius: BorderRadius.circular(radios ?? 12.0),
+        child: ImageMultiType(
+          url: url,
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode,
+          defaultTempImage: defaultTempImage,
+          memCacheHeight: memCacheHeight,
+          memCacheWidth: memCacheWidth,
+          maxDiskSize: maxDiskSize,
+        ),
+      );
 }
